@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\DataTables;
 
 class OrderController extends Controller
 {
@@ -19,7 +17,7 @@ class OrderController extends Controller
     public function datatable(Request $request)
     {
         $model = Order::query()->with(['users']);
-        return Datatables::eloquent($model)
+        return (new \Yajra\DataTables\DataTables)->eloquent($model)
             ->addIndexColumn()
             ->addColumn('id', function ($order){
                 return $order->order_id;

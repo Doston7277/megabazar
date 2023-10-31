@@ -156,7 +156,7 @@ class UserController extends Controller
     public function datatable(Request $request)
     {
         $model = User::where('is_admin', false);
-        return Datatables::eloquent($model)
+        return (new \Yajra\DataTables\DataTables)->eloquent($model)
             ->addIndexColumn()
             ->addColumn('image', function ($user){
                 if($user->user_image == 'false') {

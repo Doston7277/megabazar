@@ -85,7 +85,7 @@ class ProductController extends Controller
     public function datatable(Request $request)
     {
         $model = Product::query()->with(['subject', 'category']);
-        return Datatables::eloquent($model)
+        return (new \Yajra\DataTables\DataTables)->eloquent($model)
             ->addIndexColumn()
             ->addColumn('image', function ($product){
                 $url = asset($product->product_images);

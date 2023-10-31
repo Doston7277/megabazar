@@ -54,7 +54,7 @@ class AdminController extends Controller
         }else{
             $data->user_image = false;
         }
-        
+
         $data->user_name        = $request->admin_name;
         $data->user_phone       = $request->admin_phone;
         $data->user_password    = Crypt::encrypt($request->admin_password);
@@ -124,7 +124,7 @@ class AdminController extends Controller
     public function datatable(Request $request)
     {
         $model = User::where('is_admin', true);
-        return Datatables::eloquent($model)
+        return (new \Yajra\DataTables\DataTables)->eloquent($model)
             ->addIndexColumn()
             ->addColumn('image', function ($admin){
                 if($admin->user_image == false) {
